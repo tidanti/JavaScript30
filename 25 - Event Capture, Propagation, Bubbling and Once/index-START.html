@@ -42,7 +42,26 @@
 
 <button></button>
 <script>
+  function handleEvent(e) {
+    console.log(this.classList.value);
+    e.stopPropagation();
+  }
+  
+  const divList = document.querySelectorAll('div');
+  const myBtn = document.querySelector('button');
 
+  myBtn.addEventListener('click', () => console.log('Button was pressed!!!'), {
+    once: true
+  });
+
+  divList.forEach(divElem => {
+    divElem.addEventListener('click', handleEvent, {
+      capture: false,  // default value
+      //once: true  // NEW feature! removes event listener after first handling
+    });
+  });
+
+  //document.body.addEventListener('click', handleEvent);
 </script>
 </body>
 </html>
